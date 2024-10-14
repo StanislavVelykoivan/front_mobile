@@ -26,6 +26,8 @@ export const FormInput = ({
   const handleIsFocused = () => {
     console.log('Is focused!');
     setIsFocused(true);
+    
+    
   };
 
   const handleOffFocused = () => {

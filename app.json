@@ -1,4 +1,14 @@
 {
-  "name": "mob",
-  "displayName": "mob"
+  "name": "main",
+  "displayName": "main",
+  "extra": {
+    "eas": {
+      "projectId": "1ded2654-e7ed-40b1-b383-823fe2d56ab4"
+    }
+  },
+  "owner": "artem_m",
+  "slug": "cybe-messenger",
+  "plugins": [
+    "expo-secure-store"
+  ]
 }

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { apiPrivate } from '../../api';
 import { TPostUserSignInRequest } from './types/postSignIn';
 import { TPostUserSignUpRequest } from './types/postSignUp';
@@ -26,6 +27,7 @@ export class AuthService {
   static async postSignIn(
     data: TPostUserSignInRequest['payload']
   ): Promise<TPostUserSignInRequest['response']> {
+    
     return apiPrivate.post('/auth/login', data);
   }
 }

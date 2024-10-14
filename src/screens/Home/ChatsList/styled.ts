@@ -2,11 +2,7 @@ import {ImageBackground, Text, View} from 'react-native';
 import styled from 'styled-components';
 import LinearGradient from 'react-native-linear-gradient';
 
-export const MainBackgroundImage = styled(LinearGradient).attrs({
-  colors: ['#232a3b', '#0f1b2f'], // Градиентные цвета (пример из вашего изображения)
-  start: { x: 0, y: 0 }, // Начало градиента
-  end: { x: 1, y: 1 }, // Конец градиента
-})`
+export const MainBackgroundImage = styled(View)`
   position: absolute;
   right: 0;
   left: 0;
@@ -15,6 +11,7 @@ export const MainBackgroundImage = styled(LinearGradient).attrs({
   align-items: center;
   justify-content: center;
   flex: 1;
+  background-color: #202b36;
 `;
 
 export const MainBackgroundView = styled(View)`

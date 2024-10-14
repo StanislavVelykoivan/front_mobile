@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary, MediaType } from 'react-native-image-picker';
 import { Service } from '@common/services';
 import { useUserData } from '../../../store/tools';
 import { useDispatch } from 'react-redux';
 import { userSliceActions } from '../../../store/modules/user/reducer'; // Adjust this import as per your file structure
 import { FormView, Input, MainView, NextButton, Title } from './styled';
+import * as ImagePicker from 'expo-image-picker';
 
 type TItem = {
   label: string;
@@ -35,22 +36,33 @@ export const CreateChat = () => {
 
   const handlePickImage = async () => {
     const options = {
-      mediaType: 'photo',
+      mediaType: 'photo' as MediaType,
       includeBase64: false,
       maxHeight: 200,
       maxWidth: 200,
     };
 
-    launchImageLibrary(options, (response) => {
-      if (response.didCancel) {
-        Alert.alert('Image selection canceled');
-      } else if (response.errorCode) {
-        Alert.alert('ImagePicker Error', response.errorMessage || 'Unknown error');
-      } else if (response.assets && response.assets.length > 0) {
-        setImageUri(response.assets[0].uri);
-        Alert.alert('Image selected', 'You have selected an image for the chat.');
-      }
+   
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
     });
+
+    setImageUri(result.assets[0].uri)
+
+
+    // launchImageLibrary(options, (response) => {
+    //   if (response.didCancel) {
+    //     Alert.alert('Image selection canceled');
+    //   } else if (response.errorCode) {
+    //     Alert.alert('ImagePicker Error', response.errorMessage || 'Unknown error');
+    //   } else if (response.assets && response.assets.length > 0) {
+    //     setImageUri(response.assets[0].uri);
+    //     Alert.alert('Image selected', 'You have selected an image for the chat.');
+    //   }
+    // });
   };
 
   const handleCreateChat = () => {

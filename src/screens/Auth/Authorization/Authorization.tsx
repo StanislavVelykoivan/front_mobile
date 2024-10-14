@@ -55,7 +55,7 @@ export const Authorization = () => {
         }
       })
       .catch((e) => {
-        console.log('Error:', e);
+        console.log(e);
         setIsLoading(false);
       });
   };

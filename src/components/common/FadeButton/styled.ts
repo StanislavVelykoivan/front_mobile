@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components';
 
@@ -10,7 +10,7 @@ export const ButtonText = styled(Text)`
   font-weight: 400;
 `;
 
-export const StyledGradient = styled(LinearGradient)`
+export const StyledGradient = styled(ImageBackground)`
   padding: 10px 40px;
   border-radius: 30px;
 `;

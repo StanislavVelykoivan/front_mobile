@@ -3,6 +3,7 @@ import { MessageContainer, MessageInfo, MessageText, Triangle } from './styled';
 import { TMessageProps } from './types';
 import CheckmarkIcon from '@assets/icons/CheckMarkIcon/CheckMarkIcon'; // Импорт SVG компонента
 import { TouchableOpacity, Image, Text, Linking, View, StyleSheet } from 'react-native';
+import { FileUrl, SingleChatFile } from '@common/socket/interface/chat.interface';
 
 // Функция для открытия файла по URL
 const openFile = (fileUrl: string) => {
@@ -35,42 +36,53 @@ export const Message = ({ type, message }: TMessageProps) => {
   };
 
   // Рендер файла
-  const renderFile = (fileUrl: string) => {
-    const fileType = getFileType(fileUrl);
+  const renderFile = (files_urls: FileUrl[]) => {
+    var files = new Array<SingleChatFile>
+    files_urls.map((file_url) => {
+      var fileType = getFileType(file_url.file_url)
+      files.push({
+        fileType: fileType,
+        fileUrl: file_url.file_url
+      })
+    })
+    // const fileType = getFileType(fileUrl);
 
-    switch (fileType) {
-      case 'image':
-        return (
-          <TouchableOpacity onPress={() => openFile(fileUrl)}>
-            {/* Оформляем изображение с фиксированным размером и соблюдением пропорций */}
-            <Image source={{ uri: fileUrl }} style={styles.image} resizeMode="contain" />
-          </TouchableOpacity>
-        );
-      case 'pdf':
-        return (
-          <TouchableOpacity onPress={() => openFile(fileUrl)}>
-            <Text style={{ color: 'blue', textDecorationLine: 'underline', marginTop: 10 }}>
-              Open PDF
-            </Text>
-          </TouchableOpacity>
-        );
-      case 'video':
-        return (
-          <TouchableOpacity onPress={() => openFile(fileUrl)}>
-            <Text style={{ color: 'blue', textDecorationLine: 'underline', marginTop: 10 }}>
-              Open Video
-            </Text>
-          </TouchableOpacity>
-        );
-      default:
-        return (
-          <TouchableOpacity onPress={() => openFile(fileUrl)}>
-            <Text style={{ color: 'blue', textDecorationLine: 'underline', marginTop: 10 }}>
-              Open File
-            </Text>
-          </TouchableOpacity>
-        );
-    }
+    var componentList = files.map(file => {
+      switch (file.fileType) {
+        case 'image':
+          return (
+            <TouchableOpacity onPress={() => openFile(file.fileUrl)} key={file.fileUrl}>
+              {/* Оформляем изображение с фиксированным размером и соблюдением пропорций */}
+              <Image source={{ uri: file.fileUrl }} style={styles.image} resizeMode="contain" />
+            </TouchableOpacity>
+          );
+        case 'pdf':
+          return (
+            <TouchableOpacity onPress={() => openFile(file.fileUrl)}>
+              <Text style={{ color: 'blue', textDecorationLine: 'underline', marginTop: 10 }}>
+                Open PDF
+              </Text>
+            </TouchableOpacity>
+          );
+        case 'video':
+          return (
+            <TouchableOpacity onPress={() => openFile(file.fileUrl)}>
+              <Text style={{ color: 'blue', textDecorationLine: 'underline', marginTop: 10 }}>
+                Open Video
+              </Text>
+            </TouchableOpacity>
+          );
+        default:
+          return (
+            <TouchableOpacity onPress={() => openFile(file.fileUrl)}>
+              <Text style={{ color: 'blue', textDecorationLine: 'underline', marginTop: 10 }}>
+                Open File
+              </Text>
+            </TouchableOpacity>
+          );
+      }
+    })
+    return componentList
   };
 
   return (
@@ -79,7 +91,7 @@ export const Message = ({ type, message }: TMessageProps) => {
       
 
       {/* Если есть файл, рендерим его */}
-      {message.file_url && renderFile(message.file_url)}
+      {message.files_urls && renderFile(message.files_urls)}
 
       <MessageText>{message.message}</MessageText>
 

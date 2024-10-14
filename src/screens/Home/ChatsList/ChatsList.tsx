@@ -22,6 +22,7 @@ import RoundButton from '@components/telegramStaff/RoundButton/RoundButton';
 import MenuIcon from '@assets/icons/Menu/MenuIcon';
 import PencilIcon from '@assets/icons/Pencil/PencilIcon';
 import useSocketEvents from '@common/hooks/useSocketEvents/useSocketEvents';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export const ChatsList = () => {
   useSocketEvents(); // Use the custom hook to listen to socket events
@@ -35,17 +36,21 @@ export const ChatsList = () => {
 
   // Initial loading effect - only runs once when component is mounted
   useEffect(() => {
+    console.log("chatsList start")
     const loadData = async () => {
+      console.log(isLoading)
       if (!isLoading) return; // Prevent multiple loading
       try {
+        console.log("chatsList loading start")
         await loadUserAndChats();
         console.log('user and chats loaded');
       } finally {
         setIsLoading(false);
       }
     };
-
     loadData();
+    console.log("чаты в чат лист")
+    console.log(chats)
   }, [isLoading, loadUserAndChats]);
 
   const refreshChats = useCallback(() => {
@@ -66,7 +71,6 @@ export const ChatsList = () => {
 
   return (
     <MainBackgroundImage>
-      
       <Row
         style={{
           alignItems: 'center',
@@ -94,7 +98,7 @@ export const ChatsList = () => {
         </Text>
         <View style={{ width: 35 }} />
       </Row>
-
+          
       {isLoading ? (
         <LoadingChatsContainer>
           <ActivityIndicator size={'large'} color={'#fff'} />
@@ -122,6 +126,7 @@ export const ChatsList = () => {
           iconColor="#ffffff"
         />
       </View>
+      
     </MainBackgroundImage>
   );
 };

@@ -24,8 +24,8 @@ const formDataInstance = axios.create({
   withCredentials: false, // Для запросов с формами, например загрузка файлов
   // Позволяем Axios автоматически устанавливать заголовки для FormData
   headers: {
-    'Access-Control-Allow-Origin': '*', // Временно разрешить все источники
-  },
+    'Access-Control-Allow-Origin': '*'  // Временно разрешить все источники
+  }
 });
 
 // Перехватчик для добавления токена авторизации

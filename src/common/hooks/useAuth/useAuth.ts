@@ -15,6 +15,7 @@ export const useAuth = () => {
 
   const getToken = async () => {
     try {
+      console.log(2222222222222222222222)
       const token = await EncryptedStorageService.getToken();
       if (!token) {
         return null;

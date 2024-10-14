@@ -47,7 +47,16 @@ export interface MessageFromDB extends DatabaseResponse {
   message: string;
   date: string;
   from: User;
-  fileUrl?: string;
+  files_urls?: FileUrl[];
+}
+
+export interface FileUrl extends DatabaseResponse {
+  file_url: string;
+}
+
+export interface SingleChatFile {
+  fileType: string,
+  fileUrl: string
 }
 
 export interface MessagePayload {

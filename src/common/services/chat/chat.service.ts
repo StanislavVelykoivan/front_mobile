@@ -1,3 +1,4 @@
+import { EncryptedStorageService } from '@common/storage/encryptedStorage';
 import { apiFormData, apiPrivate } from '../../api';
 import { TGetMessages } from './types/getMessages';
 import { TGetRoomInfo } from './types/getRoomInfo';
@@ -11,6 +12,8 @@ export class ChatService {
     return apiFormData.post('/chat/create-room', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        "Authorization": `Bearer ${EncryptedStorageService.getTokenSync()}`
+        
       },
     });
   }

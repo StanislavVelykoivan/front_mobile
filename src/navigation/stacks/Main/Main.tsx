@@ -22,14 +22,18 @@ const MainStack = () => {
   let currentTab;
   useEffect(() => {
     const fetch = async () => {
+      console.log(1111111111111)
       const token = await EncryptedStorageService.getToken();
+      //       const token = await EncryptedStorageService.getRefreshToken();
       console.log(token);
       if (token || isAuthed) {
         // loadUserAndChats();
+        console.log("asdasddasasdasdasd");
         setIsAuthed(true);
         setIsLoading(false);
         currentTab = ETab.Main;
       } else {
+        console.log("123123123123123");
         setIsLoading(false);
         currentTab = ETab.Auth;
       }

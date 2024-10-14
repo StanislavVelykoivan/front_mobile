@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TAuthStack } from './types';
 import { ScreenNavigationOptions } from '../options';
@@ -8,6 +8,9 @@ import { AuthScreens } from '../../../screens/Auth';
 const Stack = createNativeStackNavigator<TAuthStack>();
 
 export const AuthStack = () => {
+  useEffect(() => {
+    console.log("In auth.tsx")
+  })
   return (
     <Stack.Navigator
       screenOptions={ScreenNavigationOptions}
