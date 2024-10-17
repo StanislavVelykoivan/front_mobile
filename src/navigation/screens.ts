@@ -7,4 +7,5 @@ export enum EScreens {
   ChatsList = 'ChatsList',
   CreateChat = 'CreateChat', // TODO: remove in prod
   ChatMain = 'ChatMain', // TODO: remove in prod
+  ChatGpt = 'ChatGpt'
 }

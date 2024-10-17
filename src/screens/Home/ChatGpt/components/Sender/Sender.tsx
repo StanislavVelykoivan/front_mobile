@@ -57,12 +57,7 @@ export const Sender = ({ onSend }: TSenderProps) => {
           placeholder="Введите сообщение"
           placeholderTextColor={'#6d7883'}
         />
-        <FileButton onPress={handleFilePicker}>
-          <Image
-            source={Images.ImagePicker}
-            style={{ width: 24, height: 24 }}
-          />
-        </FileButton>
+        
         <SendButton onPress={handleSend}>
           <Image
             source={Images.ArrowUp}

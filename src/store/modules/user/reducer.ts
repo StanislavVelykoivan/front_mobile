@@ -4,10 +4,14 @@ import { EStoreReducer } from '../../types';
 import { TUser } from '@common/types/user';
 import { TChat } from '@common/types/chat';
 import { Room } from '@common/socket/interface/chat.interface';
+import { TChatGpt, TChatGptMessage } from '@common/types/chatGPT';
 
 const initialState: TInitialState = {
   user: null,
   chats: [],
+  chatGpt: {
+    messages: []
+  },
   isAuthed: false,
 };
 
@@ -36,6 +40,10 @@ export const slice = createSlice({
       state.chats = state.chats.filter(
         (chat) => chat.uuid !== action.payload.uuid
       );
+    },
+
+    setChatGpt(state, action: PayloadAction<TChatGpt>) {
+      state.chatGpt = action.payload;
     },
   },
 });

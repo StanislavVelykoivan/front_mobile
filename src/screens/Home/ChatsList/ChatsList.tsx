@@ -23,6 +23,7 @@ import MenuIcon from '@assets/icons/Menu/MenuIcon';
 import PencilIcon from '@assets/icons/Pencil/PencilIcon';
 import useSocketEvents from '@common/hooks/useSocketEvents/useSocketEvents';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { ChatGptElem } from './components/ChatGptElem';
 
 export const ChatsList = () => {
   useSocketEvents(); // Use the custom hook to listen to socket events
@@ -30,7 +31,7 @@ export const ChatsList = () => {
   const { clearToken, clearUserData } = useAuth();
   const navigation = useNavigation<any>();
   const { loadUserAndChats } = useLoad();
-  const { chats } = useUserData();
+  const { chats, chatGpt } = useUserData();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
@@ -113,6 +114,7 @@ export const ChatsList = () => {
           }
           contentContainerStyle={{ flexGrow: 1 }}
         >
+          <ChatGptElem data={chatGpt}/>
           <ChatsListComponent data={chats} />
         </ScrollView>
       )}

@@ -52,6 +52,7 @@ export class ChatService {
     return apiFormData.post('/chat/message', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        "Authorization": `Bearer ${EncryptedStorageService.getTokenSync()}`
       },
       timeout: 10000,
     });

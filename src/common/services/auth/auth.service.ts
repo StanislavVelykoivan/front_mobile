@@ -27,7 +27,6 @@ export class AuthService {
   static async postSignIn(
     data: TPostUserSignInRequest['payload']
   ): Promise<TPostUserSignInRequest['response']> {
-    
     return apiPrivate.post('/auth/login', data);
   }
 }

@@ -14,7 +14,7 @@ import { ETab } from '@navigation/tabs';
 import socket from '../../../common/socket/connection';
 
 export const Authorization = () => {
-  const { setUserData, setIsAuthed } = useAuth();
+  const { setUserData, setIsAuthed, setChats } = useAuth();
   const navigate = useNavigation<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<TForm>({ login: '', password: '' });
@@ -25,12 +25,12 @@ export const Authorization = () => {
 
   const handleLogin = () => {
     setIsLoading(true);
-
+    console.log("start login")
     Service.AuthService.postSignIn({
       nickname: formData.login,
       password: formData.password,
     })
-      .then((res) => {
+      .then(async (res) => {
         setIsLoading(false);
 
         // Проверьте, что res содержит данные
@@ -49,13 +49,17 @@ export const Authorization = () => {
 
           setUserData(res.data.user);
           setIsAuthed(true);
+          const chatsRes = await Service.UserService.getMyRooms();
+          // console.log(chatsRes.data[0].chats[0].messages)
+          setChats(chatsRes.data);
           navigate.navigate(ETab.Main);
         } else {
           console.error('Response data is undefined or null');
         }
       })
       .catch((e) => {
-        console.log(e);
+        console.log("sddddddddddddddddddddddddddddddddddddddd")
+        console.log(e.errorCode);
         setIsLoading(false);
       });
   };

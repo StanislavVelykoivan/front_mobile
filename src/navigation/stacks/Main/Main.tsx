@@ -10,6 +10,7 @@ import { useUserData } from '../../../store/tools';
 import { useAuth } from '@common/hooks/useAuth';
 import { EncryptedStorageService } from '@common/storage/encryptedStorage';
 import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator<TMainStack>();
 
@@ -18,24 +19,27 @@ const MainStack = () => {
   const { isAuthed } = useUserData();
   // const { loadUserAndChats } = useLoad();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigation = useNavigation<any>();
 
   let currentTab;
   useEffect(() => {
     const fetch = async () => {
-      console.log(1111111111111)
+      console.log("App start 1111111111111")
       const token = await EncryptedStorageService.getToken();
       //       const token = await EncryptedStorageService.getRefreshToken();
       console.log(token);
-      if (token || isAuthed) {
+      console.log(isAuthed)
+      if (token) {
         // loadUserAndChats();
         console.log("asdasddasasdasdasd");
         setIsAuthed(true);
         setIsLoading(false);
-        currentTab = ETab.Main;
+        // navigation.navigate(ETab.Auth);
+        // currentTab = ETab.Main;
       } else {
         console.log("123123123123123");
         setIsLoading(false);
-        currentTab = ETab.Auth;
+        navigation.navigate(ETab.Auth);
       }
     };
 

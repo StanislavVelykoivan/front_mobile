@@ -6,6 +6,7 @@ import { EncryptedStorageService } from '@common/storage/encryptedStorage';
 
 export class UserService {
   static async getUserByToken(): Promise<TResponse<TUser>> {
+    console.log("111")
     return apiPrivate.get('/user',
       {
         headers: {

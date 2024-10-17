@@ -4,6 +4,7 @@ import { userSliceActions } from '../../../store/modules/user/reducer';
 import { TUser } from '@common/types/user';
 import { EncryptedStorageService } from '@common/storage/encryptedStorage';
 import { Room } from '@common/socket/interface/chat.interface';
+import { TChatGpt } from '@common/types/chatGPT';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,13 @@ export const useAuth = () => {
     [dispatch]
   );
 
+  const setChatGpt = useCallback(
+    (chats: TChatGpt) => {
+      dispatch(userSliceActions.setChatGpt(chats));
+    },
+    [dispatch]
+  );
+
   const clearUserData = useCallback(() => {
     console.log('User data deleted');
     dispatch(userSliceActions.clearUser());
@@ -71,5 +79,6 @@ export const useAuth = () => {
     clearToken,
     setIsAuthed,
     setChats,
+    setChatGpt
   };
 };

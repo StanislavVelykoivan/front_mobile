@@ -22,6 +22,7 @@ const ChatsStack = () => {
         component={ChatsScreens.CreateChat}
       />
       <Stack.Screen name={EScreens.ChatMain} component={ChatsScreens.Chat} />
+      <Stack.Screen name={EScreens.ChatGpt} component={ChatsScreens.ChatGpt} />
     </Stack.Navigator>
   );
 };
